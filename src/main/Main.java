@@ -21,7 +21,7 @@ public class Main {
      *                otherwise the program is entered at the console.
      *             - "-v" indicates verbose mode.
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Throwable {
         InputStream is = null;
 
         for (String arg: args) {
@@ -38,6 +38,7 @@ public class Main {
 
             verbose = true;
         }
+
         Term t = (Term)analyze(is);
         Type a = t.typer(new EmptyEnv<Type>());
         Value v = ((Term)analyze(is)).interp(new EmptyEnv());

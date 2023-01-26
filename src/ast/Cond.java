@@ -3,7 +3,9 @@ package ast;
 import interp.Env;
 import interp.IntVal;
 import interp.Value;
+import typer.Atom;
 import typer.Type;
+import typer.TypeError;
 
 public class Cond extends Term {
     public Term test;
@@ -18,7 +20,7 @@ public class Cond extends Term {
 
     @Override
     public Value interp(Env e) {
-        if (((IntVal) test.interp(e)).value == 0) {
+        if (((IntVal) test.interp(e)).value != 0) {
             return branchTrue.interp(e);
         } else {
             return branchFalse.interp(e);
@@ -27,6 +29,11 @@ public class Cond extends Term {
 
     @Override
     public Type typer(Env e) {
-        return null;
+        Type trueBranch = branchTrue.typer(e).deref();
+        Type falseBranch = branchFalse.typer(e).deref();
+        if(trueBranch != falseBranch) {
+            throw new TypeError("Type différents dans les branches");
+        }
+        return trueBranch;
     }
 }

@@ -6,6 +6,7 @@ grammar PCF;
 term : LIT                                   # Lit
      | VAR                                   # Var
      | PARG term  PARD                       # Par
+     | FUNC  VAR  ARROW  term               # Fun
      | term OP_PRIO term                     # BinOp
      | LET VAR EQUAL term IN term            # Liaison
      | term OP term                          # BinOp
@@ -13,6 +14,8 @@ term : LIT                                   # Lit
      ;
 
 // règles lexicales
+ARROW : '->' ;
+FUNC : 'fun' ;
 IFZ : 'ifz' ;
 THEN : 'then' ;
 ELSE : 'else' ;

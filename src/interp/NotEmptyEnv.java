@@ -2,9 +2,9 @@ package interp;
 
 import java.util.Optional;
 
-public class NotEmptyEnv extends Env {
-    public Binding binding;
-    public Env env;
+public class NotEmptyEnv<T> extends Env {
+    public Binding<T> binding;
+    public Env<T> env;
 
     public NotEmptyEnv(Binding binding, Env env) {
         this.binding = binding;
@@ -17,22 +17,17 @@ public class NotEmptyEnv extends Env {
     }
 
     @Override
-    public Binding last() {
+    public Binding<T> last() {
         return this.binding;
     }
 
     @Override
-    public Env previous() {
+    public Env<T> previous() {
         return this.env;
     }
 
     @Override
-    public Env add(String id, Value value) {
-        return new NotEmptyEnv(new Binding(id, value), this);
-    }
-
-    @Override
-    public Optional<Value> lookup(String id) {
+    public Optional<T> lookup(String id) {
         return this.binding.getName().equals(id) ? Optional.of(this.binding.getValue()) : this.env.lookup(id);
     }
 }

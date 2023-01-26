@@ -3,6 +3,7 @@ package ast;
 import interp.Env;
 import interp.IntVal;
 import interp.Value;
+import typer.Atom;
 import typer.Type;
 
 public class Lit extends Term {
@@ -19,6 +20,6 @@ public class Lit extends Term {
 
     @Override
     public Type typer(Env e) {
-        return null;
+        return Atom.INT;
     }
 }

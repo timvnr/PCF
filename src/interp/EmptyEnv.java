@@ -14,17 +14,12 @@ public class EmptyEnv<T> extends Env {
     }
 
     @Override
-    public Env previous() {
+    public Env<T> previous() {
         return null;
     }
 
     @Override
-    public Env add(String id, Value value) {
-        return null;
-    }
-
-    @Override
-    public Optional<Value> lookup(String id) {
+    public Optional<T> lookup(String id) {
         return null;
     }
 }

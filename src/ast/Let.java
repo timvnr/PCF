@@ -6,31 +6,33 @@ import typer.Type;
 
 public class Let extends Term {
     String name;
-    Term value;
-    Term link;
+    Term term1;
+    Term term2;
 
     public String getName() {
         return name;
     }
 
     public Term getValue() {
-        return value;
+        return term1;
     }
 
-    public Let(String name, Term value, Term link) {
+    public Let(String name, Term term1, Term term2) {
         this.name = name;
-        this.value = value;
-        this.link = link;
+        this.term1 = term1;
+        this.term2 = term2;
     }
 
     @Override
     public Value interp(Env e) {
-        return null;
+        e = e.add(name,term1.interp(e));
+        return term2.interp(e);
     }
 
     @Override
     public Type typer(Env<Type> e) {
-        return null;
+        e = e.add(name,term1.typer(e));
+        return term2.typer(e);
     }
 
 

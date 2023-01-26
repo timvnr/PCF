@@ -51,4 +51,10 @@ public class ASTVisitor extends PCFBaseVisitor<AST> {
     public AST visitLiaison(PCFParser.LiaisonContext ctx) {
         return new Let(ctx.VAR().getText(),(Term) visit(ctx.term(0)), (Term) visit(ctx.term(1)));
     }
+
+    @Override
+    public AST visitFun(PCFParser.FunContext ctx) {
+        //return new Fun(new typer.Var(ctx.VAR().getText()), (Term) visit(ctx.term()));
+        return null;
+    }
 }
